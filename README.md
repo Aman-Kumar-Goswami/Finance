@@ -1,254 +1,321 @@
 # 💰 Finora – Personal Finance Manager
 
-**Finora** is a modern and intuitive personal finance management application built with **Kotlin and Jetpack Compose**. It helps users track income and expenses, analyze spending patterns, manage savings goals, and maintain their financial records securely.
+**Finora** is a modern personal finance management Android application built with **Kotlin, Jetpack Compose, Material 3, Room Database, and MVVM architecture**.
+
+It helps users manage their income and expenses, visualize spending patterns, set savings goals, organize categories, and maintain their financial records locally and securely.
 
 ---
 
 ## ✨ Features
 
-### 🧾 Smart Transaction Entry
+### 🧾 Smart Transaction Management
 
-* Quickly add income and expense transactions.
-* Voice-based transaction entry using Voice-to-Text.
-* Intelligent text parsing to detect transaction amounts and categories.
-* Add transaction notes and details.
+* Add **income and expense** transactions quickly.
+* Add transaction notes and additional details.
+* Voice-based transaction entry using **Speech-to-Text**.
+* Intelligent text parsing to identify transaction amounts and categories.
+* Edit and delete transactions.
+* Undo recently deleted transactions.
+* Confirmation before clearing all financial data.
 
-### 📊 Financial Insights
+### 📊 Financial Dashboard & Insights
 
-* Dual Pie Charts for **Income vs. Expenses**.
-* Weekly spending trends using Bar Charts.
-* Category-wise spending analysis.
-* Color-coded financial information for better visualization.
+* Income vs. Expense **Pie Charts**.
+* Weekly spending **Bar Charts**.
+* Category-wise expense analysis.
+* Visual representation of financial activity.
+* Real-time updates when transactions are added or removed.
+* Clean and color-coded financial information.
 
 ### 🗂️ Dynamic Category Management
 
-* Add custom income and expense categories.
-* Long-press to delete unwanted categories.
-* Confirmation dialog before deleting categories.
-* Prevents duplicate categories using case-insensitive validation.
+* Create custom income and expense categories.
+* Delete unwanted categories using long-press.
+* Confirmation dialog before category deletion.
+* Prevent duplicate categories using **case-insensitive validation**.
+* Separate category management for income and expenses.
 
 ### 💱 Multi-Currency Support
 
-Supports multiple currencies:
+Finora supports multiple currencies:
 
-* 🇺🇸 USD
-* 🇮🇳 INR
-* 🇪🇺 EUR
-* 🇬🇧 GBP
-* 🇯🇵 JPY
-* 🇦🇪 AED
+| Currency           | Code |
+| ------------------ | ---- |
+| 🇺🇸 US Dollar     | USD  |
+| 🇮🇳 Indian Rupee  | INR  |
+| 🇪🇺 Euro          | EUR  |
+| 🇬🇧 British Pound | GBP  |
+| 🇯🇵 Japanese Yen  | JPY  |
+| 🇦🇪 UAE Dirham    | AED  |
 
-Currency symbols are automatically updated throughout the application.
+Currency symbols are automatically reflected throughout the application.
 
 ### 🎯 Savings Goals
 
-* Set monthly savings goals.
+* Set monthly savings targets.
 * Track current savings progress.
-* Monitor financial progress directly from the dashboard.
+* Monitor progress directly from the dashboard.
+* Compare income, expenses, and savings performance.
 
 ### 👤 Personalized Experience
 
 * Customize the application with your name.
-* Light and Dark Mode support.
-* Clean and responsive Material 3 interface.
+* Light and Dark theme support.
+* Modern **Material 3** interface.
+* Responsive Jetpack Compose UI.
+* Simple and user-friendly navigation.
 
-### 🔔 Daily Reminders
+### 🔔 Daily Transaction Reminders
 
-* Automated daily reminders to record transactions.
-* Uses Android AlarmManager for scheduled notifications.
+* Schedule daily reminders to record transactions.
+* Uses Android **AlarmManager** for scheduled notifications.
+* Notification permission is requested when required.
 * Helps users maintain consistent financial records.
 
-### 🛡️ Data Safety
+### 🛡️ Local Data & Safety
 
-* Local data persistence using Room Database.
-* Undo option for recently deleted transactions.
-* Confirmation dialog before clearing all data.
-* All financial records remain stored locally on the device.
-
----
-
-## 🛠️ Tech Stack
-
-| Category         | Technology                         |
-| ---------------- | ---------------------------------- |
-| Language         | Kotlin                             |
-| UI               | Jetpack Compose                    |
-| Design           | Material 3                         |
-| Architecture     | MVVM                               |
-| Database         | Room Database                      |
-| Navigation       | Jetpack Compose Navigation         |
-| State Management | Kotlin Flow & StateFlow            |
-| Notifications    | AlarmManager                       |
-| Voice Input      | Android Speech / Voice-to-Text API |
-| Build Tool       | Gradle                             |
-| IDE              | Android Studio                     |
+* Financial data is stored locally using **Room Database**.
+* No financial records need to be uploaded to a remote server.
+* Undo support for recently deleted transactions.
+* Confirmation before deleting all data.
+* Data remains available across app restarts.
 
 ---
 
-## 🏗️ Architecture
+# 🛠️ Tech Stack
 
-Finora follows the **MVVM (Model–View–ViewModel)** architecture to maintain a clean separation between UI, business logic, and data.
+| Category         | Technology                                 |
+| ---------------- | ------------------------------------------ |
+| Language         | Kotlin                                     |
+| UI Toolkit       | Jetpack Compose                            |
+| Design System    | Material 3                                 |
+| Architecture     | MVVM                                       |
+| State Management | Kotlin Flow / StateFlow                    |
+| Database         | Room Database                              |
+| Navigation       | Jetpack Compose Navigation                 |
+| Voice Input      | Android Speech Recognition / Voice-to-Text |
+| Notifications    | Android AlarmManager                       |
+| Charts           | Compose-based Data Visualization           |
+| Build Tool       | Gradle                                     |
+| IDE              | Android Studio                             |
+
+---
+
+# 🏗️ Architecture
+
+Finora follows the **MVVM (Model–View–ViewModel)** architecture with a repository layer to maintain separation between UI, business logic, and data management.
 
 ```text
-┌─────────────────────────┐
-│      Jetpack Compose    │
-│           UI            │
-└────────────┬────────────┘
-             │
-             ▼
-┌─────────────────────────┐
-│       ViewModel         │
-│   StateFlow / Logic     │
-└────────────┬────────────┘
-             │
-             ▼
-┌─────────────────────────┐
-│       Repository        │
-│     Data Management     │
-└────────────┬────────────┘
-             │
-             ▼
-┌─────────────────────────┐
-│       Room Database     │
-│      Local Storage      │
-└─────────────────────────┘
+┌──────────────────────────────┐
+│       Jetpack Compose        │
+│             UI               │
+└──────────────┬───────────────┘
+               │
+               ▼
+┌──────────────────────────────┐
+│          ViewModel           │
+│      StateFlow / Logic       │
+└──────────────┬───────────────┘
+               │
+               ▼
+┌──────────────────────────────┐
+│         Repository           │
+│       Data Management        │
+└──────────────┬───────────────┘
+               │
+               ▼
+┌──────────────────────────────┐
+│        Room Database         │
+│        Local Storage         │
+└──────────────────────────────┘
 ```
+
+### Architecture Flow
+
+```text
+User Interaction
+       ↓
+Jetpack Compose UI
+       ↓
+ViewModel
+       ↓
+Repository
+       ↓
+Room DAO
+       ↓
+Local Database
+```
+
+This structure keeps the UI independent from the data layer and makes the application easier to maintain, test, and extend.
 
 ---
 
-## 📱 Screenshots
+# 📱 Screenshots
 
-### 🏠 Home
+## 🏠 Home Dashboard
 
-![Home Screen](screenshots/home.png)
+![Finora Home](screenshots/home.png)
 
-### 🎙️ Smart Entry
+The home dashboard provides a quick overview of income, expenses, savings, and recent transactions.
+
+---
+
+## 🎙️ Smart Transaction Entry
 
 ![Smart Entry](screenshots/smart_entry.png)
 
-### 📊 Financial Insights
-
-![Financial Insights](screenshots/insights.png)
-
-### ⚙️ Settings
-
-![Settings](screenshots/settings.png)
+Users can enter transactions using voice input and quickly record financial activity.
 
 ---
 
-## 🚀 Getting Started
+## 📊 Financial Insights
 
-### 1. Clone the Repository
+![Financial Insights](screenshots/insights.png)
+
+Visual charts help users understand their spending patterns and financial performance.
+
+---
+
+## ⚙️ Settings
+
+![Finora Settings](screenshots/settings.png)
+
+Manage preferences such as currency, theme, user information, categories, and reminders.
+
+---
+
+# 🚀 Getting Started
+
+## 1. Clone the Repository
 
 ```bash
 git clone https://github.com/Aman-Kumar-Goswami/Finance.git
 ```
 
-### 2. Open the Project
+## 2. Open the Project
 
-Open the cloned project in **Android Studio**.
+Open the project in **Android Studio**.
 
-### 3. Sync Gradle
+## 3. Sync Gradle
 
-Allow Android Studio to sync all Gradle dependencies.
+Allow Android Studio to download and synchronize all required dependencies.
 
-### 4. Run the Application
+## 4. Run the Application
 
 Connect an Android device or start an emulator and run the application.
 
 ---
 
-## 📋 Requirements
+# 📋 Requirements
 
 * Android Studio **Ladybug or newer**
 * Android SDK
 * Android device or emulator
-* Internet connection for initial dependency downloads
+* JDK compatible with the project configuration
+* Internet connection for the initial Gradle dependency download
 
 ---
 
-## 🔐 Permissions
+# 🔐 Permissions
 
-Depending on the enabled features, the application may require permissions for:
+Finora requests permissions only when the related functionality is used.
 
-* 🎙️ Microphone — Voice-to-Text transaction entry
-* 🔔 Notifications — Daily transaction reminders
+### 🎙️ Microphone
 
-Permissions are requested only when the related feature requires them.
+Required for voice-based transaction entry.
 
----
+### 🔔 Notifications
 
-## 🎯 Project Highlights
-
-Finora demonstrates practical implementation of:
-
-* Modern Android UI development with Jetpack Compose.
-* MVVM architecture.
-* Local database management with Room.
-* Reactive state management using StateFlow.
-* Compose Navigation.
-* Financial data visualization.
-* Voice-based user interaction.
-* Scheduled Android notifications.
-* Dynamic category management.
-* Multi-currency handling.
-* Dark theme support.
+Required for daily transaction reminders on Android versions that require notification permission.
 
 ---
 
-## 🔮 Future Improvements
+# 🎯 Project Highlights
 
-Planned improvements include:
+Finora demonstrates practical implementation of modern Android development concepts:
 
-* ☁️ Cloud synchronization.
-* 🔐 User authentication.
-* 🌐 Web dashboard.
-* 📩 Automatic transaction detection from bank/UPI SMS.
-* 📤 CSV/PDF financial reports.
-* 🤖 AI-powered financial insights.
-* 💳 Account and card management.
-* 🔄 Multi-device synchronization.
+* ✅ Kotlin-based Android development
+* ✅ Jetpack Compose UI
+* ✅ Material 3 design
+* ✅ MVVM architecture
+* ✅ Repository pattern
+* ✅ Room Database
+* ✅ Kotlin Flow and StateFlow
+* ✅ Compose Navigation
+* ✅ Financial data visualization
+* ✅ Voice-to-Text transaction entry
+* ✅ Intelligent transaction parsing
+* ✅ Dynamic category management
+* ✅ Multi-currency support
+* ✅ Savings goal tracking
+* ✅ Android AlarmManager
+* ✅ Scheduled notifications
+* ✅ Light and Dark theme
+* ✅ Local-first data management
 
 ---
 
-## 🤝 Contributing
+# 🔮 Future Improvements
+
+The following features are planned for future versions:
+
+* ☁️ Cloud data synchronization
+* 🔐 User authentication
+* 🌐 Web dashboard
+* 📱 Multi-device synchronization
+* 📩 Automatic transaction detection from bank/UPI SMS
+* 📤 CSV and PDF financial reports
+* 🤖 AI-powered financial insights
+* 💳 Account and card management
+* 📈 Advanced financial analytics
+* 🔄 Cloud backup and restore
+
+---
+
+# 🤝 Contributing
 
 Contributions, suggestions, and feature requests are welcome.
 
-To contribute:
+### Contribution Steps
 
 1. Fork the repository.
-2. Create a new branch.
+2. Create a new feature branch.
 3. Make your changes.
 4. Commit your changes.
 5. Push the branch.
-6. Create a Pull Request.
+6. Open a Pull Request.
 
 ---
 
-## 👨‍💻 Author
+# 👨‍💻 Author
 
-### Aman Kumar
+## Aman Kumar
 
 **Android Developer | Kotlin | Jetpack Compose**
 
-* GitHub: [Aman-Kumar-Goswami](https://github.com/Aman-Kumar-Goswami)
-* Project Repository: [Finora – FinanceApp](https://github.com/Aman-Kumar-Goswami/Finance)
+* GitHub: `Aman-Kumar-Goswami`
+* Project: `Finance / Finora`
 
 ---
 
-## ⭐ Support
+# ⭐ Support
 
 If you find **Finora** useful, consider giving the repository a ⭐ on GitHub.
 
+Your feedback and suggestions are always welcome.
+
 ---
 
-## 📄 License
+# 📄 License
 
 This project is licensed under the **MIT License**.
 
 ---
 
-<p align="center">
-  Made with ❤️ using Kotlin & Jetpack Compose
-</p>
+<div align="center">
+
+### Made with ❤️ using Kotlin & Jetpack Compose
+
+**Finora — Take control of your finances.**
+
+</div>
